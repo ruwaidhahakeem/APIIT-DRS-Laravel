@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+// auth route
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,3 +23,19 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('room/{id}', function ($id) {
+    return view('room.show',[
+        'room' => $id
+    ]);
+})
+->name('room.show');
+
+
+
+//home route
+Route::get('/', function () {
+    return view('home');
+})
+//will not work if not defined
+->name('home');
